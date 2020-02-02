@@ -3,7 +3,7 @@ class Slider {
         this.slider = slider;
         this.inner = this.slider.querySelector(".slider__inner").children;
         this.totalSlides = this.inner.length;
-        this.width = this.slider.clientWidth;
+        this.width = this.slider.clientWidth /* clientHeight */;
         this.nextBtn = this.slider.querySelector(".slider__next");
         this.prevBtn = this.slider.querySelector(".slider__prev");
 
@@ -21,10 +21,10 @@ class Slider {
     setWidth() {
         let totalWidth = 0;
         for (let i = 0; i < this.inner.length; i++) {
-            this.inner[i].style.width = this.width + "px";
+            this.inner[i].style.width /* height */ = this.width + "px";
             totalWidth += this.width;
         }
-        this.slider.querySelector(".slider__inner").style.width = totalWidth + "px";
+        this.slider.querySelector(".slider__inner").style.width /* height */ = totalWidth + "px";
     }
     next() {
         if (this.index == this.totalSlides - 1) {
