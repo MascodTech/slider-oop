@@ -24,7 +24,9 @@ class Slider {
         this.setWidth()
         slider.autoplay ? this.autoplay : false
 
-        this.autoplayStop = slider.autoplay ? this.autoplay():false;
+        this.autoplayStop = slider.autoplay ? this.autoplay() : false;
+
+        this.autoplayTime = slider.autoplayTime
 
 
     }
@@ -48,7 +50,7 @@ class Slider {
 
         this.slider.querySelector(".slider__inner").style.transform = `translate${this.direction}(${-this.jumpWidth}px)`
 
-        this.autoplay = clearInterval()
+        //    return this.autoplay = clearTimeout(this.autoplayStop)
     }
     prev() {
         if (this.index == 0) {
@@ -62,27 +64,32 @@ class Slider {
 
         this.slider.querySelector(".slider__inner").style.transform = `translate${this.direction}(${-this.jumpWidth}px)`
 
-        this.autoplay = false
+        // this.autoplay = false;
+
     }
 
     autoplay() {
-        return setInterval(() => this.next(), 1000)
+        for (let j = 0; j < Infinity; j++) {
+            return setTimeout(() => this.next(), this.autoplayTime)
+        } 
     }
+
 
 }
 
 
-// creating object
+
 var slider1 = new Slider({
     slider: '.slider1',
     direction: 'X',
-    autoplay: false
+    autoplay: true,
+    autoplayTime: 1000
 })
 
 var slider2 = new Slider({
     slider: '.slider2',
     direction: 'Y',
-    autoplay: true
+    autoplay: false
 })
 
 
@@ -91,5 +98,8 @@ var slider2 = new Slider({
 
 
 
-
-
+// Надо добавить появление кнопок
+// append js
+// ParentNode.append()  https://developer.mozilla.org/ru/docs/Web/API/ParentNode/append
+// node.append(...nodes or strings) https://learn.javascript.ru/modifying-document
+// document.createElement https://developer.mozilla.org/ru/docs/DOM/document.createElement
