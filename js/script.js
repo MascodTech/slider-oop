@@ -1,11 +1,16 @@
 class Slider {
     constructor(slider) {
-        this.slider = slider;
-        this.inner = this.slider.querySelector(".slider__inner").children;
+        this.slider = document.querySelector(slider.slider)
+        this.inner = this.slider.querySelector(".slider__inner").children
         this.totalSlides = this.inner.length;
-        this.width = this.slider.clientWidth /* clientHeight */;
-        this.nextBtn = this.slider.querySelector(".slider__next");
-        this.prevBtn = this.slider.querySelector(".slider__prev");
+
+        this.direction = slider.direction
+
+        this.width = this.direction == 'X' ? this.slider.clientWidth : this.slider.clientHeight
+        this.nextBtn = this.slider.querySelector(".slider__next")
+        this.prevBtn = this.slider.querySelector(".slider__prev")
+
+        this.style = this.direction == 'X' ? 'height' : 'height'
 
         let that = this;
         this.nextBtn.addEventListener('click', () => { 
@@ -36,7 +41,7 @@ class Slider {
             this.jumpWidth += this.width;
         }
 
-        this.slider.querySelector(".slider__inner").style.transform = `translateX(${-this.jumpWidth}px)`
+        this.slider.querySelector(".slider__inner").style.transform = `translate${this.direction}(${-this.jumpWidth}px)`
     }
     prev() {
         if (this.index == 0) {
@@ -48,7 +53,7 @@ class Slider {
             this.jumpWidth -= this.width;
         }
 
-        this.slider.querySelector(".slider__inner").style.transform = `translateX(${-this.jumpWidth}px)`
+        this.slider.querySelector(".slider__inner").style.transform = `translate${this.direction}(${-this.jumpWidth}px)`
     }
 
 }
@@ -57,8 +62,14 @@ const sliderOne = document.querySelector(".slider1");
 const sliderTwo = document.querySelector(".slider2");
 
 // creating object
-var slider1 = new Slider(sliderOne)
-var slider2 = new Slider(sliderTwo)
+var slider1 = new Slider({
+    slider: '.slider1',
+    direction: 'X'
+})
+var slider2 = new Slider({
+    slider: '.slider2',
+    direction: 'X'
+})
 
 
 
