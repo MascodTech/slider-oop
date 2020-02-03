@@ -10,26 +10,31 @@ class Slider {
         this.nextBtn = this.slider.querySelector(".slider__next")
         this.prevBtn = this.slider.querySelector(".slider__prev")
 
-        this.style = this.direction == 'X' ? 'height' : 'height'
+        this.style = this.direction == 'X' ? 'width' : 'height'
 
         let that = this;
-        this.nextBtn.addEventListener('click', () => { 
+        this.nextBtn.addEventListener('click', () => {
             that.next()
         });
         this.prevBtn.addEventListener('click', () => {
             that.prev()
         });
-        this.index = 0;
-        this.jumpWidth = 0;
-        this.setWidth();
+        this.index = 0
+        this.jumpWidth = 0
+        this.setWidth()
+        slider.autoplay ? this.autoplay : false
+
+        this.autoplayStop = slider.autoplay ? this.autoplay():false;
+
+
     }
     setWidth() {
         let totalWidth = 0;
         for (let i = 0; i < this.inner.length; i++) {
-            this.inner[i].style.width /* height */ = this.width + "px";
+            this.inner[i].style = `${this.style}:${this.width}px`;
             totalWidth += this.width;
         }
-        this.slider.querySelector(".slider__inner").style.width /* height */ = totalWidth + "px";
+        this.slider.querySelector(".slider__inner").style = `${this.style}:${totalWidth}px`;
     }
     next() {
         if (this.index == this.totalSlides - 1) {
@@ -42,6 +47,8 @@ class Slider {
         }
 
         this.slider.querySelector(".slider__inner").style.transform = `translate${this.direction}(${-this.jumpWidth}px)`
+
+        this.autoplay = clearInterval()
     }
     prev() {
         if (this.index == 0) {
@@ -54,21 +61,28 @@ class Slider {
         }
 
         this.slider.querySelector(".slider__inner").style.transform = `translate${this.direction}(${-this.jumpWidth}px)`
+
+        this.autoplay = false
+    }
+
+    autoplay() {
+        return setInterval(() => this.next(), 1000)
     }
 
 }
 
-const sliderOne = document.querySelector(".slider1");
-const sliderTwo = document.querySelector(".slider2");
 
 // creating object
 var slider1 = new Slider({
     slider: '.slider1',
-    direction: 'X'
+    direction: 'X',
+    autoplay: false
 })
+
 var slider2 = new Slider({
     slider: '.slider2',
-    direction: 'X'
+    direction: 'Y',
+    autoplay: true
 })
 
 
