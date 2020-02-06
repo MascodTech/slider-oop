@@ -24,9 +24,10 @@ class Slider {
         this.setWidth()
         slider.autoplay ? this.autoplay : false
 
-        this.autoplayStop = slider.autoplay ? this.autoplay() : false;
+        // this.autoplayStop = slider.autoplay ? this.autoplay() : false;
 
         this.autoplayTime = slider.autoplayTime
+        this.autoplay()
 
 
     }
@@ -69,9 +70,7 @@ class Slider {
     }
 
     autoplay() {
-        for (let j = 0; j < Infinity; j++) {
-            return setTimeout(() => this.next(), this.autoplayTime)
-        } 
+        setInterval(() => this.next(), this.autoplayTime)
     }
 
 
@@ -83,13 +82,14 @@ var slider1 = new Slider({
     slider: '.slider1',
     direction: 'X',
     autoplay: true,
-    autoplayTime: 1000
+    autoplayTime: 2000
 })
 
 var slider2 = new Slider({
     slider: '.slider2',
     direction: 'Y',
-    autoplay: false
+    autoplay: true,
+    autoplayTime: 2000
 })
 
 
