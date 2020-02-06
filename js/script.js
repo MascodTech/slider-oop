@@ -27,7 +27,15 @@ class Slider {
         // this.autoplayStop = slider.autoplay ? this.autoplay() : false;
 
         this.autoplayTime = slider.autoplayTime
-        this.autoplay()
+
+        if (slider.autoplay) {
+           this.autoplay() 
+        }
+
+        this.slider.addEventListener('mouseover', () => clearInterval(this.autoplayStart))
+        this.slider.addEventListener('mouseout', () => this.autoplay())
+
+        
 
 
     }
@@ -70,7 +78,7 @@ class Slider {
     }
 
     autoplay() {
-        setInterval(() => this.next(), this.autoplayTime)
+        this.autoplayStart = setInterval(() => this.next(), this.autoplayTime)
     }
 
 
